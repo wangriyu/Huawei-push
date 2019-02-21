@@ -1,17 +1,15 @@
-var HwPush = require('../lib');
-var Message = HwPush.Message;
-var Notification = HwPush.Notification;
+var HwPush = require('../lib')
+var Payload = HwPush.Payload
+var Notification = HwPush.Notification
 
-var config = require('./config');
+var config = require('./config')
 
-var msg = new Message();
-msg
-  .title('title example')
-  .content('description example');
+var payload = new Payload()
+payload.title(config.title).content(config.content).appPkgName(config.appPkgName).icon(config.icon).customize([{ 'aa': 'aaa' }, { 'bb': 'bbb' }])
 
 var notification = new Notification({
   appId: config.appId,
   appSecret: config.appSecret
-});
+})
 
-notification.send(config.tokens, msg, config.callback);
+notification.send(config.tokens, payload, config.callback)
